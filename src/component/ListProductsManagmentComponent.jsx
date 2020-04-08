@@ -6,7 +6,7 @@ import logo from '../images/Nike-spodnie-dresowe.jpg';
 
 const INSTRUCTOR = 'David'
 
-class ListProductsComponent extends Component{
+class ListProductsManagmentComponent extends Component{
 
     constructor(props){
         super(props)
@@ -27,13 +27,34 @@ this.addProductClicked = this.addProductClicked.bind(this)
 
     componentDidMount(){
 
-        CourseDataService.retrieveAllProductsByTypeAndCategoryId(this.state.type, this.state.category)
-        .then(
-            response => {
-                console.log(response);
-                this.setState({products: response.data})
-            }
-        )
+        if(this.state.type==null){
+            CourseDataService.retrieveAllManagmentProducts()
+            .then(
+                response => {
+                    console.log(response);
+                    this.setState({products: response.data})
+                }
+            )
+        }
+        else if(this.state.type!=null&&this.state.category==null){
+            CourseDataService.retrieveAllManagmentProductsByType(this.state.type)
+            .then(
+                response => {
+                    console.log(response);
+                    this.setState({products: response.data})
+                }
+            )
+        }
+        else {
+            CourseDataService.retrieveAllManagmentProductsByTypeAndCategoryId(this.state.type, this.state.category)
+            .then(
+                response => {
+                    console.log(response);
+                    this.setState({products: response.data})
+                }
+            )
+        }
+
     }
 
 
@@ -99,4 +120,4 @@ addProductClicked() {
     }
 }
 
-export default ListProductsComponent
+export default ListProductsManagmentComponent

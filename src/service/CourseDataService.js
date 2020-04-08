@@ -20,12 +20,28 @@ class CourseDataService {
         return axios.post(`${INSTRUCTOR_API_URL}/courses/`, course);
     }
 
+    retrieveAllProducts(){
+        return axios.get(`${COURSE_API_URL}/`);
+    }
+
     retrieveAllProductsByType(type) {
         return axios.get(`${COURSE_API_URL}/${type}`);
     }
 
     retrieveAllProductsByTypeAndCategoryId(type, category){
         return axios.get(`${COURSE_API_URL}/${type}/${category}`);
+    }
+
+    retrieveAllManagmentProducts(){
+        return axios.get(`${COURSE_API_URL}/managment`);
+    }
+
+    retrieveAllManagmentProductsByType(type) {
+        return axios.get(`${COURSE_API_URL}/managment/${type}`);
+    }
+
+    retrieveAllManagmentProductsByTypeAndCategoryId(type, category){
+        return axios.get(`${COURSE_API_URL}/managment/${type}/${category}`);
     }
 
 
