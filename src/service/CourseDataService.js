@@ -19,6 +19,16 @@ class CourseDataService {
     createCourse(name, course) {
         return axios.post(`${INSTRUCTOR_API_URL}/courses/`, course);
     }
+
+    retrieveAllProductsByType(type) {
+        return axios.get(`${COURSE_API_URL}/${type}`);
+    }
+
+    retrieveAllProductsByTypeAndCategoryId(type, category){
+        return axios.get(`${COURSE_API_URL}/${type}/${category}`);
+    }
+
+
 }
 
 

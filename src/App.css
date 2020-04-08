@@ -1,1 +1,12 @@
-@import url(https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css)
+@import url(https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css);
+h1{
+    color:blueviolet
+}
+h3{
+    color:blueviolet
+}
+
+.image {
+    height: 200px;
+    width: 200px;
+}
