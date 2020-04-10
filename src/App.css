@@ -10,3 +10,10 @@ h3{
     height: 200px;
     width: 200px;
 }
+td{
+    text-align:center;
+}
+
+.textPrice{
+    font-size: 25px;
+}

@@ -20,8 +20,11 @@ class CourseDataService {
         return axios.post(`${INSTRUCTOR_API_URL}/courses/`, course);
     }
 
+
+
+    
     retrieveAllProducts(){
-        return axios.get(`${COURSE_API_URL}/`);
+        return axios.get(`${COURSE_API_URL}`);
     }
 
     retrieveAllProductsByType(type) {
@@ -31,6 +34,9 @@ class CourseDataService {
     retrieveAllProductsByTypeAndCategoryId(type, category){
         return axios.get(`${COURSE_API_URL}/${type}/${category}`);
     }
+
+
+
 
     retrieveAllManagmentProducts(){
         return axios.get(`${COURSE_API_URL}/managment`);
