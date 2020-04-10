@@ -22,6 +22,7 @@ class ListProductsComponent extends Component{
         
         this.deleteProductClicked = this.deleteProductClicked.bind(this)
         this.updateProductClicked = this.updateProductClicked.bind(this)
+        this.nextLineTable = this.nextLineTable.bind(this)
         
 this.addProductClicked = this.addProductClicked.bind(this)
     }
@@ -83,7 +84,44 @@ addProductClicked() {
     this.props.history.push(`/courses/-1`)
 }
 
+nextLineTable(records){
+
+    return(
+        <tr>{
+            records.map(
+            product =>
+                
+                <td><img className="image" src={require(`../images/${product.path}`)} alt="Spodnie" />
+                <div><br></br>{product.name}
+                    <br></br><br></br><div className="textPrice">{product.price} zł</div></div></td>
+                
+            
+            )}
+        </tr>)
+    
+}
+
     render() {
+        var count=1
+        let tables = [];
+        let tableRecords = [];
+
+        {
+            this.state.products.map(
+                product =>{
+                    tableRecords.push(product);
+                    
+
+                   if(count==3){
+                       count=0;
+                       tables.push(this.nextLineTable(tableRecords));
+                       tableRecords=[];
+                   }
+                   count= count+1;
+                })
+                tables.push(this.nextLineTable(tableRecords));
+        }
+
         return (
             <div className="container">
                 
@@ -93,17 +131,9 @@ addProductClicked() {
                     <table className="table">
 
                         <tbody>
-                            {
-                                this.state.products.map(
-                                    product =>
-                                        <tr key={product.productId}>
-
-                                            <td><img className="image" src={require(`../images/${product.path}`)} alt="Spodnie" />
-                                            <div><br></br>{product.name}
-                                                <br></br><br></br><div className="textPrice">{product.price} zł</div></div></td>
-                                        </tr>
-                                )
-                            }
+                            
+                            {tables}
+                                
                         </tbody>
                     </table>
                     <div className="row">
