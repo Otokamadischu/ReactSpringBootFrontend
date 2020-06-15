@@ -14,7 +14,8 @@ class ListProductsManagmentComponent extends Component{
             type: this.props.match.params.type,
             category: this.props.match.params.category,
             products: [],
-            message: null
+            message: null,
+            pathArray: window.location.pathname.split('/')
         }
 
         
