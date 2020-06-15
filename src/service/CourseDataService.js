@@ -4,6 +4,7 @@ const INSTRUCTOR = 'in28minutes'
 const COURSE_API_URL = 'http://localhost:8080'
 const INSTRUCTOR_API_URL = `${COURSE_API_URL}/instructors/${INSTRUCTOR}`
 class CourseDataService {
+    
     retrieveAllCourses(name) {
         return axios.get(`${INSTRUCTOR_API_URL}/courses`);
     }
@@ -33,6 +34,9 @@ class CourseDataService {
 
     retrieveAllProductsByTypeAndCategoryId(type, category){
         return axios.get(`${COURSE_API_URL}/${type}/${category}`);
+    }
+    retrieveProduct(type,category,id){
+        return axios.get(`${COURSE_API_URL}/${type}/${category}/${id}`);
     }
 
 

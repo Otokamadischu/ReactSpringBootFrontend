@@ -5,20 +5,22 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import CourseComponent from './CourseComponent';
 import ListProductsManagmentComponent from './ListProductsManagmentComponent';
 import ListProductsComponent from './ListProductsComponent';
+import ProductComponent from './ProductComponent';
 class InstructorApp extends Component {
     render() {
         return (
             <Router>
                 <>
-                    <h1 class="text-blue">Shop Application</h1>
+                    <h1 class="text-blue">Gym Nova</h1>
                     <Switch>
                         
                         <Route path="/courses" exact component={ListCoursesComponent} />
                         <Route path="/courses/:id" component={CourseComponent} />
                         
                         <Route path="/" exact component={ListProductsComponent}/>
-                        <Route path="/kobiety" exact component={ListProductsComponent}/>
-                        <Route path="/(kobiety|mezczyzna|suplementy)/:category" exact component={ListProductsComponent}/>
+                        <Route path="/(kobiety|mezczyzni|suplementy)" exact component={ListProductsComponent}/>
+                        <Route path="/(kobiety|mezczyzni|suplementy)/:category" exact component={ListProductsComponent}/>
+                        <Route path="/(kobiety|mezczyzni|suplementy)/:category/:id" exact component={ProductComponent}/>
 
 
 

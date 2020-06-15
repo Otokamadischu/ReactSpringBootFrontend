@@ -14,6 +14,7 @@ class ListProductsComponent extends Component{
             type: this.props.match.params.type,
             category: this.props.match.params.category,
             products: [],
+            categoryOrType: '',
             message: null,
             pathArray: window.location.pathname.split('/')
             
@@ -36,6 +37,7 @@ this.addProductClicked = this.addProductClicked.bind(this)
             .then(
                 response => {
                     console.log(response);
+                    this.setState({categoryOrType: 'All products'})
                     this.setState({products: response.data})
                 }
             )
@@ -45,6 +47,7 @@ this.addProductClicked = this.addProductClicked.bind(this)
             .then(
                 response => {
                     console.log(response);
+                    this.setState({categoryOrType: this.Capitalize(this.state.pathArray[1])})
                     this.setState({products: response.data})
                 }
             )
@@ -54,6 +57,7 @@ this.addProductClicked = this.addProductClicked.bind(this)
             .then(
                 response => {
                     console.log(response);
+                    this.setState({categoryOrType: this.Capitalize(this.state.category)})
                     this.setState({products: response.data})
                 }
             )
@@ -101,6 +105,10 @@ nextLineTable(records){
     
 }
 
+Capitalize(str){
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
     render() {
         var count=1
         let tables = [];
@@ -125,7 +133,7 @@ nextLineTable(records){
         return (
             <div className="container">
                 
-<h3>All Products</h3>
+        <h3>{this.state.categoryOrType}</h3>
 {this.state.message && <div class="alert alert-success">{this.state.message}</div>}
                 <div className="container">
                     <table className="table">

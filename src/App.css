@@ -1,9 +1,11 @@
 @import url(https://unpkg.com/bootstrap@4.1.0/dist/css/bootstrap.min.css);
 h1{
-    color:blueviolet
+    color:rgb(1, 164, 243);
+    text-align: center;
 }
 h3{
-    color:blueviolet
+    color:rgb(1, 164, 243);
+    margin-left: 50px;
 }
 
 .image {
