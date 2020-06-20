@@ -21,9 +21,19 @@ class CourseDataService {
         return axios.post(`${INSTRUCTOR_API_URL}/courses/`, course);
     }
 
+    createProduct(type, category, product){
+        return axios.post(`${COURSE_API_URL}/${type}/${category}`,  product);
+    }
+
+    updateProduct(type, category, product){
+        return axios.put(`${COURSE_API_URL}/${type}/${category}`,  product);
+    }
+
+    deleteProduct(type, category, id){
+        return axios.delete(`${COURSE_API_URL}/${type}/${category}/${id}`);
+    }
 
 
-    
     retrieveAllProducts(){
         return axios.get(`${COURSE_API_URL}`);
     }
