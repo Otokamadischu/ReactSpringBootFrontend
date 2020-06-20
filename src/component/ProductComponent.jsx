@@ -17,12 +17,11 @@ class ProductComponent extends Component{
             message: null,
             pathArray: window.location.pathname.split('/')
         }
+        this.onSubmit = this.onSubmit.bind(this)
+        this.validate = this.validate.bind(this)
+        this.deleteProduct = this.deleteProduct.bind(this)
 
-        
-        this.deleteProductClicked = this.deleteProductClicked.bind(this)
-        this.updateProductClicked = this.updateProductClicked.bind(this)
-        
-this.addProductClicked = this.addProductClicked.bind(this)
+
     }
 
 
@@ -40,37 +39,67 @@ this.addProductClicked = this.addProductClicked.bind(this)
 
     }
 
+    deleteProduct(id) {
+        const type = this.state.pathArray[1]
+        const category = this.state.pathArray[2]
 
+        CourseDataService.deleteProduct(type, category, id)
+            .then(
+                response => {
+                    this.setState({ message: `Delete of product ${id} successful` })
+                    this.props.history.push('/'+type+'/'+category)
+                }
+            )
+    }
+
+onSubmit(values) {
     
-deleteProductClicked(id) {
-    CourseDataService.deleteCourse(INSTRUCTOR, id)
-        .then(
-            response => {
-                this.setState({ message: `Delete of course ${id} Successful` })
-                this.refreshCourses()
-            }
-        )
+    let product = {
+        productId: this.state.product.productId,
+        description: values.description,
+        name: values.name,
+        path: 'Nike-spodnie-dresowe.jpg',
+        
+        price: 10,
+        quantity: 10,
+        size: 10,
+        categoryId: 1
+        
+    }
+    const type = this.state.pathArray[1]
+    const category = this.state.pathArray[2]
+    if (this.state.id === -1) {
+        CourseDataService.createProduct("kobiety", "category", product)
+            .then(() => this.props.history.push('/kobiety/category'))
+    } else {
+        CourseDataService.updateProduct(type, category, product)
+            .then(() => this.props.history.push('/'+type+'/'+category))
+    }
+    
+    console.log(values);
 }
 
-
-updateProductClicked(id) {
-    console.log('update ' + id)
-    this.props.history.push(`/courses/${id}`)
+validate(values) {
+let errors = {}
+if (!values.description) {
+    errors.description = 'Enter a Description'
+} else if (values.description.length < 5) {
+    errors.description = 'Enter atleast 5 Characters in Description'
+}
+return errors
 }
 
-
-addProductClicked() {
-    this.props.history.push(`/courses/-1`)
-}
 
     render() {
         const { product } = this.state;
+        
 
         if (product === null) {
           return null;
           
         }
 
+        let {name, productId, description} =  this.state.product
 
         return (
             <div className="container">
@@ -82,9 +111,42 @@ addProductClicked() {
                 {this.state.product.name}
                 <img className="image" src={require(`../images/${this.state.product.path}`)} alt="Spodnie" />
 
-                    <div className="row">
-    <button className="btn btn-success" onClick={this.addProductClicked}>Add</button>
-</div>
+                <Formik
+                        initialValues={{ name,productId,description}}
+                        onSubmit={this.onSubmit}
+                        validateOnChange={false}
+                        validateOnBlur={false}
+                        validate={this.validate}
+                        enableReinitialize={true}
+                    >
+                        {
+                            (props) => (
+                                <Form>
+                                    <ErrorMessage name="description" component="div"
+                                        className="alert alert-warning" />
+                                    <fieldset className="form-group">
+                                        <label>Id</label>
+                                        <Field className="form-control" type="text" name="productId" disabled />
+                                    </fieldset>
+                                    <fieldset className="form-group">
+                                        <label>Name</label>
+                                        <Field className="form-control" type="text" name="name" />
+                                    </fieldset>
+                                    <fieldset className="form-group">
+                                        <label>Description</label>
+                                        <Field className="form-control" type="text" name="description" />
+                                    </fieldset>
+                                    <button className="btn btn-success" type="submit">Save</button>
+                                </Form>
+                            )
+                        }
+                    </Formik>
+
+
+                    <div >
+                    <button className="btn btn-success" onClick={() => this.deleteProduct(this.state.product.productId)}>Delete</button>
+
+    </div>
                 </div>
             </div>
         )
