@@ -1,8 +1,11 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import CourseDataService from '../service/CourseDataService';
+import TdLink from '../function/TdLink';
 
 import logo from '../images/Nike-spodnie-dresowe.jpg';
+
 
 const INSTRUCTOR = 'David'
 
@@ -21,6 +24,7 @@ class ListProductsManagmentComponent extends Component{
         
         this.deleteProductClicked = this.deleteProductClicked.bind(this)
         this.updateProductClicked = this.updateProductClicked.bind(this)
+        this.openProduct = this.openProduct(this)
         
 this.addProductClicked = this.addProductClicked.bind(this)
     }
@@ -81,6 +85,12 @@ addProductClicked() {
     this.props.history.push(`/courses/-1`)
 }
 
+openProduct(productId){
+
+}
+
+
+
     render() {
         return (
             <div className="container">
@@ -101,12 +111,18 @@ addProductClicked() {
                             {
                                 this.state.products.map(
                                     product =>
-                                        <tr key={product.productId}>
-                                            <td>{product.productId}</td>
-                                            <td>{product.path}</td>
-                                            <td><img className="image" src={require(`../images/${product.path}`)} alt="Spodnie" /></td>
+
+                                        <tr key={product.productId} >
+
+                                            <TdLink to={`/managment/${this.state.type}/${this.state.category}/${product.productId}`} >
+                                                {product.productId}</TdLink>
+                                            <TdLink to={`/managment/${this.state.type}/${this.state.category}/${product.productId}`} >
+                                                {product.path}</TdLink>
+                                            <TdLink to={`/managment/${this.state.type}/${this.state.category}/${product.productId}`} >
+                                                <img className="image" src={require(`../images/${product.path}`)} alt="Spodnie" /></TdLink>
                                             <td><button className="btn btn-warning" onClick={() => this.deleteCourseClicked(product.id)}>Delete</button></td>
                                             <td><button className="btn btn-success" onClick={() => this.updateCourseClicked(product.id)}>Update</button></td>
+                                            
                                         </tr>
                                 )
                             }

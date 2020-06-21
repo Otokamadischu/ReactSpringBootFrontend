@@ -30,7 +30,7 @@ function NextLineTable(records){
             records.map(
             product =>
                 
-                <td><img className="image" src={require(`../images/${product.path}`)} alt="Spodnie" />
+                <td><img className="image2" src={require(`../images/${product.path}`)} alt="Spodnie" />
                 <div><br></br>{product.name}
                     <br></br><br></br><div className="textPrice">{product.price} zł</div></div></td>
                 

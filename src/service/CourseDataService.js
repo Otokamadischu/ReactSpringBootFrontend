@@ -21,18 +21,26 @@ class CourseDataService {
         return axios.post(`${INSTRUCTOR_API_URL}/courses/`, course);
     }
 
+
+
+    
+
     createProduct(type, category, product){
-        return axios.post(`${COURSE_API_URL}/${type}/${category}`,  product);
+        return axios.post(`${COURSE_API_URL}/managment/${type}/${category}`,  product);
     }
 
     updateProduct(type, category, product){
-        return axios.put(`${COURSE_API_URL}/${type}/${category}`,  product);
+        return axios.put(`${COURSE_API_URL}/managment/${type}/${category}`,  product);
     }
 
     deleteProduct(type, category, id){
-        return axios.delete(`${COURSE_API_URL}/${type}/${category}/${id}`);
+        return axios.delete(`${COURSE_API_URL}/managment/${type}/${category}/${id}`);
     }
 
+
+    retrieveProduct(type,category,id){
+        return axios.get(`${COURSE_API_URL}/${type}/${category}/${id}`);
+    }
 
     retrieveAllProducts(){
         return axios.get(`${COURSE_API_URL}`);
@@ -45,13 +53,8 @@ class CourseDataService {
     retrieveAllProductsByTypeAndCategoryId(type, category){
         return axios.get(`${COURSE_API_URL}/${type}/${category}`);
     }
-    retrieveProduct(type,category,id){
-        return axios.get(`${COURSE_API_URL}/${type}/${category}/${id}`);
-    }
 
-
-
-
+    
     retrieveAllManagmentProducts(){
         return axios.get(`${COURSE_API_URL}/managment`);
     }
@@ -63,8 +66,6 @@ class CourseDataService {
     retrieveAllManagmentProductsByTypeAndCategoryId(type, category){
         return axios.get(`${COURSE_API_URL}/managment/${type}/${category}`);
     }
-
-
 }
 
 

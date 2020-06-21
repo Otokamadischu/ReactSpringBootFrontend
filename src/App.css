@@ -9,13 +9,51 @@ h3{
 }
 
 .image {
+    height: 100px;
+    width: 100px;
+}
+
+.image2 {
     height: 200px;
     width: 200px;
 }
+
+.link{
+    color: black;
+}
+
+
 td{
     text-align:center;
 }
 
 .textPrice{
     font-size: 25px;
+}
+
+.product{
+    text-align:center;
+}
+
+.center{
+    text-align:center;
+}
+
+.centerPadding{
+    text-align:center;
+    padding:20px 0px 0px 0px;
+
+}
+
+.productForm{
+
+    margin: auto;
+    width: 600px;
+    border: 3px solid grey;
+    padding: 25px;
+}
+
+.btn-info, .btn-info:hover, .btn-info:active, .btn-info:visited {
+    background-color:rgb(1, 164, 243) !important;
+    border-color:rgb(1, 164, 243) !important;
 }
